@@ -64,7 +64,7 @@ if opcion == "ver recetas":
         "Filtrar por tipo",
         ["todos", "vegano", "vegetariano", "omnivoro"]
     )
-    data = supabase.table('todos').select("*").execute()
+    data = supabase.table('recetas').select("*").execute()
     recetas = data.data
 
     # FILTRO ESTACIÓN
