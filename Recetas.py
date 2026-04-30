@@ -9,6 +9,7 @@ key = st.secrets["KEY"]
 supabase: client = create_client(url, key)
 
 opcion = st.radio(
+    "Que quieres: "
     ["añadir recetas","ver recetas"]
 )
 
