@@ -35,21 +35,24 @@ if opcion == "añadir recetas":
 
         if imagen is not None:
             nombre_archivo = f"{uuid.uuid4()}.png"
-            
+
             supabase.storage.from_("imagenes").upload(
                 nombre_archivo,
                 imagen.read()
             )
-            
+
             url_imagen = supabase.storage.from_("imagenes").get_public_url(nombre_archivo)["publicUrl"]
 
-        supabase.table('recetas').insert({
-            'nombre': nombre,
-            'tipo': tipo,
-            'estacion': estacion,
-            'imagen': url_imagen
-        }).execute()
+        datos = {
+            "nombre": nombre,
+            "tipo": tipo,
+            "estacion": estacion
+        }
 
+        if url_imagen:
+            datos["imagen"] = url_imagen
+
+        supabase.table("recetas").insert(datos).execute()
 
 
 if opcion == "ver recetas":
