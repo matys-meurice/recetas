@@ -38,12 +38,12 @@ if opcion == "añadir recetas":
             
             supabase.storage.from_("imagenes").upload(
                 nombre_archivo,
-                imagen.getvalue()
+                imagen.read()
             )
             
-            url_imagen = supabase.storage.from_("imagenes").get_public_url(nombre_archivo)
+            url_imagen = supabase.storage.from_("imagenes").get_public_url(nombre_archivo)["publicUrl"]
 
-        supabase.table('todos').insert({
+        supabase.table('recetas').insert({
             'nombre': nombre,
             'tipo': tipo,
             'estacion': estacion,
