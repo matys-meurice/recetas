@@ -88,7 +88,7 @@ if opcion == "ver recetas":
         recetas = data.data
 
         # FILTROS
-        if filtro_estacion != "todas":
+        if filtro_estacion != "todos":
             recetas = [r for r in recetas if r["estacion"] == filtro_estacion]
 
         if filtro_tipo != "todos":
