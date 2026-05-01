@@ -63,37 +63,46 @@ if opcion == "añadir recetas":
 
 
 if opcion == "ver recetas":
-    st.title("Recetas")
-
-    filtro_estacion = st.radio(
-        "Filtrar por estación",
-        ["todas", "invierno", "verano"]
-    )
-
-    filtro_tipo = st.radio(
-        "Filtrar por tipo",
-        ["todos", "vegano", "vegetariano", "omnivoro"]
-    )
-    data = supabase.table('recetas').select("*").execute()
-    recetas = data.data
-
-    # FILTRO ESTACIÓN
-    if filtro_estacion != "todas":
-        recetas = [r for r in recetas if r["estacion"] == filtro_estacion]
-
-    # FILTRO TIPO
-    if filtro_tipo != "todos":
-        recetas = [r for r in recetas if r["tipo"] == filtro_tipo]
     
-    cols = st.columns(3)
+    col_filtros, col_recetas = st.columns([1, 4])
 
-    for i, receta in enumerate(recetas):
-        col = cols[i % 3]
+    with col_filtros:
+        st.markdown("### 🔍 Filtros")
 
-        with col:
-            st.subheader(receta["nombre"])
-            st.write(f"{receta['tipo']}")
-            st.write(f"{receta['estacion']}")
+        filtro_estacion = st.radio(
+            "Estación",
+            ["todas", "invierno", "verano"]
+        )
 
-            if receta["imagen"]:
-                st.image(receta["imagen"], use_container_width=True)
+        filtro_tipo = st.radio(
+            "Tipo",
+            ["todos", "vegano", "vegetariano", "omnivoro"]
+        )
+
+    with col_recetas:
+        st.title("Recetas")
+
+        data = supabase.table('recetas').select("*").execute()
+        recetas = data.data
+
+        # FILTROS
+        if filtro_estacion != "todas":
+            recetas = [r for r in recetas if r["estacion"] == filtro_estacion]
+
+        if filtro_tipo != "todos":
+            recetas = [r for r in recetas if r["tipo"] == filtro_tipo]
+
+        cols = st.columns(3)
+
+        for i, receta in enumerate(recetas):
+            col = cols[i % 3]
+
+            with col:
+                st.subheader(receta["nombre"])
+                st.write(receta["tipo"])
+                st.write(receta["estacion"])
+
+                if receta["imagen"]:
+                    st.image(receta["imagen"], use_container_width=True)
+                else:
+                    st.write("Sin imagen")
