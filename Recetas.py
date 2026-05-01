@@ -19,7 +19,7 @@ if opcion == "añadir recetas":
     
     tipo = st.radio(
         "Como es:",
-        ["vegano","vegetariano","omnivoro"]
+        ["vegano","vegetariano","carne","pescado"]
     )
     
     estacion = st.radio(
@@ -66,8 +66,9 @@ if opcion == "ver recetas":
     
     col_filtros, col_recetas = st.columns([1, 4])
 
+    # FILTROS
     with col_filtros:
-        st.markdown("### 🔍 Filtros")
+        st.markdown("### Filtros")
 
         filtro_estacion = st.radio(
             "Estación",
@@ -76,9 +77,10 @@ if opcion == "ver recetas":
 
         filtro_tipo = st.radio(
             "Tipo",
-            ["todos", "vegano", "vegetariano", "omnivoro"]
+            ["todos", "vegano", "vegetariano","carne","pescado"]
         )
 
+    # RECETAS
     with col_recetas:
         st.title("Recetas")
 
@@ -92,17 +94,19 @@ if opcion == "ver recetas":
         if filtro_tipo != "todos":
             recetas = [r for r in recetas if r["tipo"] == filtro_tipo]
 
-        cols = st.columns(3)
+        cols = st.columns(2)
 
         for i, receta in enumerate(recetas):
-            col = cols[i % 3]
+            col = cols[i % 2]
 
             with col:
-                st.subheader(receta["nombre"])
-                st.write(receta["tipo"])
-                st.write(receta["estacion"])
+                # CAJA (card)
+                with st.container(border=True):
+                    st.subheader(receta["nombre"])
+                    st.write(f"{receta['tipo']}")
+                    st.write(f"{receta['estacion']}")
 
-                if receta["imagen"]:
-                    st.image(receta["imagen"], use_container_width=True)
-                else:
-                    st.write("Sin imagen")
+                    if receta["imagen"]:
+                        st.image(receta["imagen"], use_container_width=True)
+                    else:
+                        st.write("Sin imagen")
