@@ -41,8 +41,8 @@ if opcion == "añadir recetas":
                 imagen.read()
             )
 
-            url_imagen = supabase.storage.from_("imagenes").get_public_url(nombre_archivo)["publicUrl"]
-
+            url_imagen = supabase.storage.from_("imagenes").get_public_url(nombre_archivo)
+            
         datos = {
             "nombre": nombre,
             "tipo": tipo,
