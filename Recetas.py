@@ -55,7 +55,7 @@ if opcion == "añadir recetas":
 
         try:
             res = supabase.table("recetas").insert(datos).execute()
-            st.success("Receta añadida 🔥")
+            st.success("Receta añadida")
             #st.write(res)
         except Exception as e:
             st.error("ERROR:")
