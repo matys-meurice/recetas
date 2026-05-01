@@ -72,7 +72,7 @@ if opcion == "ver recetas":
 
         filtro_estacion = st.radio(
             "Servido",
-            ["todas", "caliente", "frio"]
+            ["todos", "caliente", "frio"]
         )
 
         filtro_tipo = st.radio(
