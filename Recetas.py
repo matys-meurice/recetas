@@ -52,7 +52,16 @@ if opcion == "añadir recetas":
         if url_imagen:
             datos["imagen"] = url_imagen
 
-        supabase.table("recetas").insert(datos).execute()
+        # 🔍 DEBUG (MUY IMPORTANTE)
+        st.write("DATOS:", datos)
+
+        try:
+            res = supabase.table("recetas").insert(datos).execute()
+            st.success("Receta añadida 🔥")
+            st.write(res)
+        except Exception as e:
+            st.error("ERROR:")
+            st.write(e)
 
 
 if opcion == "ver recetas":
