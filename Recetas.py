@@ -42,7 +42,7 @@ if opcion == "añadir recetas":
             )
 
             url_imagen = supabase.storage.from_("imagenes").get_public_url(nombre_archivo)
-            
+
         datos = {
             "nombre": nombre,
             "tipo": tipo,
@@ -51,14 +51,12 @@ if opcion == "añadir recetas":
 
         if url_imagen:
             datos["imagen"] = url_imagen
-
-        # 🔍 DEBUG (MUY IMPORTANTE)
-        st.write("DATOS:", datos)
+        #st.write("DATOS:", datos)
 
         try:
             res = supabase.table("recetas").insert(datos).execute()
             st.success("Receta añadida 🔥")
-            st.write(res)
+            #st.write(res)
         except Exception as e:
             st.error("ERROR:")
             st.write(e)
