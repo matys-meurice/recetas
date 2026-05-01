@@ -24,7 +24,7 @@ if opcion == "añadir recetas":
     
     estacion = st.radio(
         "De que estacion es:",
-        ["invierno","verano"]
+        ["caliente","frio"]
     )
 
     imagen = st.file_uploader("Sube una imagen (opcional)", type=["png","jpg","jpeg"])
@@ -71,8 +71,8 @@ if opcion == "ver recetas":
         st.markdown("### Filtros")
 
         filtro_estacion = st.radio(
-            "Estación",
-            ["todas", "invierno", "verano"]
+            "Servido",
+            ["todas", "caliente", "frio"]
         )
 
         filtro_tipo = st.radio(
